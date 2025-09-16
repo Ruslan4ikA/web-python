@@ -9,11 +9,23 @@
 
 <!-- сообщение о сохранении настроек -->
     {% if messages %}
-        <div class="alert">
+        <div id="alert" class="alert">
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}
         </div>
+    
+        <script>
+            // Удаляем уведомление через 5 секунд (5000 мс)
+            setTimeout(function() {
+                const alertBox = document.getElementById('alert');
+                if (alertBox) {
+                    alertBox.style.transition = "opacity 0.5s ease";
+                    alertBox.style.opacity = "0";
+                    setTimeout(() => alertBox.remove(), 500);  // Удаляем после затухания
+                }
+            }, 5000);
+        </script>
     {% endif %}
 
     <div class="container">
