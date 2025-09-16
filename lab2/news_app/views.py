@@ -3,19 +3,18 @@ from django.http import HttpResponse
 
 # Данные прямо в коде
 CATEGORIES = [
-    'Политика',
-    'Спорт',
-    'Наука',
-    'Технологии',
-    'Здоровье',
-    'Развлечения',
-    'Бизнес'
+    'Politic',
+    'Sport',
+    'Science',
+    'Techno',
+    'Health',
+    'Business'
 ]
 
 LANGUAGES = {
-    'ru': 'Русский',
-    'en': 'Английский',
-    'de': 'Немецкий'
+    'ru': 'Rus',
+    'en': 'Engl',
+    'de': 'Deutsch'
 }
 
 # Пример новостей
@@ -23,19 +22,19 @@ NEWS_DATA = [
     {
         'title': 'Новые технологии меняют мир',
         'content': 'Описание новости про технологии...',
-        'category': 'Технологии',
+        'category': 'Techno',
         'image': '/static/images/tech.jpg'
     },
     {
         'title': 'Победа в чемпионате мира',
         'content': 'Команда одержала победу...',
-        'category': 'Спорт',
+        'category': 'Sport',
         'image': '/static/images/sport.jpg'
     },
     {
         'title': 'Открытие в области медицины',
         'content': 'Учёные сделали важное открытие...',
-        'category': 'Здоровье',
+        'category': 'Health',
         'image': '/static/images/health.jpg'
     }
 ]
