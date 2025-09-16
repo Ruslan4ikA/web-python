@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Персонализированные новости</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Персонализированные Новости</h1>
+            <p>Выберите интересующие вас категории и язык</p>
+        </header>
+
+        <form method="post" action="{% url 'save_prefs' %}">
+            {% csrf_token %}
+            <div class="preferences">
+                <h2>Настройки</h2>
+
+                <label>Язык интерфейса:</label>
+                <select name="language">
+                    {% for code, name in languages.items %}
+                        <option value="{{ code }}" {% if selected_lang == code %}selected{% endif %}>
+                            {{ name }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <br><br>
+
+                <label>Выберите категории:</label><br>
+                {% for cat in categories %}
+                    <label>
+                        <input type="checkbox"
+                               name="categories"
+                               value="{{ cat }}"
+                               {% if cat in selected_categories %}checked{% endif %}>
+                        {{ cat }}
+                    </label><br>
+                {% endfor %}
+            </div>
+
+            <button type="submit">Сохранить настройки</button>
+        </form>
+
+        <hr>
+
+        <section class="news-feed">
+            <h2>Ваши новости</h2>
+            {% if news_list %}
+                {% for news in news_list %}
+                    <div class="news-item">
+                        <img src="{{ news.image }}" alt="Image" width="150">
+                        <div class="news-content">
+                            <h3>{{ news.title }}</h3>
+                            <p>{{ news.content }}</p>
+                            <small><strong>Категория:</strong> {{ news.category }}</small>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Нет новостей по выбранным категориям.</p>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>
