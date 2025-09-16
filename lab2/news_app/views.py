@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.contrib import messages
 
 # Данные прямо в коде
 CATEGORIES = [
@@ -79,11 +81,12 @@ def save_preferences(request):
         categories = request.POST.getlist('categories')
         language = request.POST.get('language', 'ru')
 
-        response = HttpResponse("Настройки сохранены!")
+        response = redirect('home')
         # Сохраняем в куках
         response.set_cookie('categories', ','.join(categories), max_age=365*24*60*60)
         response.set_cookie('language', language, max_age=365*24*60*60)
 
+        messages.success(request, 'Настройки успешно сохранены!')
         return response
 
-    return index(request)
+    return redirect('home')
